@@ -16,6 +16,11 @@ public class LinearEquationRunner {
         int y2 = Integer.parseInt(coordinate2.substring(coordinate2.indexOf(" ") + 1,
                 coordinate2.indexOf(")")));
 
+        if (x1 == x2) {
+            System.out.println("These points are on a vertical line: x = " + x1);
+            java.lang.System.exit(0);
+        }
+
         LinearEquation line = new LinearEquation(x1, y1, x2, y2);
         System.out.println();
         System.out.println(line.lineInfo());

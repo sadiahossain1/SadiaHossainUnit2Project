@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class LinearEquation {
     /* Instance Variables */
     private int x1;
@@ -45,7 +43,59 @@ public class LinearEquation {
        (x1, y1) and (x2, y2) in slope-intercept (y = mx + b) form, e.g. "y = 3x + 1.5".
      */
     public String equation() {
-        return "y = " + slope() + "x " + yIntercept();
+        if ((y2 - y1) % (x2 - x1) != 0 && slope() > 0 && slope() != 1 && (y2 - y1) > 0) {
+            if (yIntercept() > 0) {
+                return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
+            } else if (yIntercept() < 0) {
+                return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x - " + Math.abs(yIntercept());
+            } else {
+                return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x";
+            }
+        } else if ((y2 - y1) % (x2 - x1) == 0 && slope() != 1 && slope() != -1 && slope() != 0) {
+            if (yIntercept() > 0) {
+                return "y = " + (int) slope() + "x + " + yIntercept();
+            } else if (yIntercept() < 0) {
+                return "y = " + (int) slope() + "x - " + Math.abs(yIntercept());
+            } else {
+                return "y = " + (int) slope() + "x";
+            }
+        } else if (slope() == 1) {
+            if (yIntercept() > 0) {
+                return "y = x + " + yIntercept();
+            } else if (yIntercept() < 0) {
+                return "y = x - " + Math.abs(yIntercept());
+            } else {
+                return "y = x";
+            }
+        } else if (slope() == -1) {
+            if (yIntercept() > 0) {
+                return "y = -x + " + yIntercept();
+            } else if (yIntercept() < 0) {
+                return "y = -x - " + Math.abs(yIntercept());
+            } else {
+                return "y = -x";
+            }
+        } else if (((y2 - y1) < 0 && (x2 - x1) > 0) && ((y2 - y1) % (x2 - x1) != 0) ||
+                ((y2 - y1) > 0 && (x2 - x1) < 0) && ((y2 - y1) % (x2 - x1) != 0)) {
+            if (yIntercept() > 0) {
+                return "y = -" + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x + " + yIntercept();
+            } else if (yIntercept() < 0) {
+                return "y = -" + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x - " + Math.abs(yIntercept());
+            } else {
+                return "y = -" + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x";
+            }
+        } else if ((y2 - y1) < 0 && (x2 - x1) < 0 && (y2 - y1) % (x2 - x1) != 0) {
+            if (yIntercept() > 0) {
+                return "y = " + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x + " + yIntercept();
+            } else if (yIntercept() < 0){
+                return "y = " + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x - " + Math.abs(yIntercept());
+            } else {
+                return "y = " + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x";
+            }
+        } else {
+            return "y = " + (int) yIntercept();
+        }
+
     }
 
     /* Returns a String of the coordinate point on the line that has the given x value, with
@@ -81,10 +131,10 @@ public class LinearEquation {
 
       */
     public String lineInfo() {
-        return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")" +
-                "\nThe slope of this line is: " + slope() + "\nThe y-intercept of the line " +
-                "is: " + yIntercept() + "\nThe distance between the two points is: "
-                + distance();
+        return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")" + "\nThe " +
+                "equation of the line between these points is: " + equation() + "\nThe slope of this line is: "
+                + slope() + "\nThe y-intercept of the line is: " + yIntercept() + "\nThe distance between the " +
+                "two points is: " + distance();
     }
 
 }
